@@ -132,6 +132,14 @@ namespace ApiCom
         }
     }
 
+    public static class ApiComFactory
+    {
+        public static IApiCom CreateInstance()
+        {
+            return new APICom();
+        }
+    }
+
     internal class APICom : IApiCom
     {
 

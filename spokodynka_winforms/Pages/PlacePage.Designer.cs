@@ -114,13 +114,13 @@
             // currentTempLabel
             // 
             currentTempLabel.Dock = DockStyle.Left;
-            currentTempLabel.Font = new Font("Lucida Sans", 28F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            currentTempLabel.Font = new Font("Lucida Sans", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
             currentTempLabel.ForeColor = Color.WhiteSmoke;
             currentTempLabel.Location = new Point(287, 0);
             currentTempLabel.Name = "currentTempLabel";
             currentTempLabel.Size = new Size(150, 150);
             currentTempLabel.TabIndex = 0;
-            currentTempLabel.Text = "0°C";
+            currentTempLabel.Text = "0,0°C";
             currentTempLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // placePageName

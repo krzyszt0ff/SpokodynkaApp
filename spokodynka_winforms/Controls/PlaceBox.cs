@@ -1,19 +1,24 @@
-﻿namespace spokodynka_winforms
+﻿using Locations;
+using System.Xml.Linq;
+
+namespace spokodynka_winforms
 {
     public partial class PlaceBox : UserControl
     {
         public static PlaceBox selectedPlaceBox = null;
         public event EventHandler PlaceSelected;
+        public Location location;
         public PlaceBox()
         {
             InitializeComponent();
         }
 
-        public PlaceBox(string name)
+        public PlaceBox(Location location)
         {
             InitializeComponent();
             this.Margin = new Padding(10);
-            nameLabel.Text = name;
+            nameLabel.Text = location.Name;
+            this.location = location;
         }
 
         public string PlaceName

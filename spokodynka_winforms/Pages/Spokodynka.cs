@@ -1,3 +1,4 @@
+using ApiCom;
 using FileManagement;
 using Locations;
 
@@ -29,7 +30,7 @@ namespace spokodynka_winforms
 
         private Location findPlace(string query)
         {
-            return locations.FirstOrDefault(loc => loc.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0);
+            return locations.FirstOrDefault(loc => loc.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0); ///Wyszukiwanie do poprawienia!!! Za bardzo wyszukuje,,,,,
         }
 
         private void Spokodynka_Resize(object sender, EventArgs e)
@@ -54,7 +55,7 @@ namespace spokodynka_winforms
                     }
                 }
 
-                PlaceBox newPlaceBox = new PlaceBox(PlaceName)
+                PlaceBox newPlaceBox = new PlaceBox(place)
                 {
                     Dock = DockStyle.Top,
                     Margin = new Padding(10)
@@ -76,7 +77,7 @@ namespace spokodynka_winforms
         {
             if (sender is PlaceBox selectedPlace)
             {
-                LoadPage(selectedPlace.PlaceName);
+                LoadPage(selectedPlace.location);
             }
         }
 
@@ -100,11 +101,11 @@ namespace spokodynka_winforms
             LoadPage();
         }
 
-        public void LoadPage(string placeName)
+        public void LoadPage(Location location)
         {
             mainContentPanel.Controls.Clear();
 
-            PlacePage placePage = new PlacePage(placeName)
+            PlacePage placePage = new PlacePage(location)
             {
                 Dock = DockStyle.Fill
             };
