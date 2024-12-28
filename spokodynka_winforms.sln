@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spokodynka_gui", "spokodynka_winforms\Spokodynka_gui.csproj", "{6C246537-9725-44E7-AB91-857AC90B04F4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherLogic", "WeatherLogic\WeatherLogic.csproj", "{27CB7EF6-F798-48A6-ABDE-4F06E3BE0D08}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C246537-9725-44E7-AB91-857AC90B04F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C246537-9725-44E7-AB91-857AC90B04F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C246537-9725-44E7-AB91-857AC90B04F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C246537-9725-44E7-AB91-857AC90B04F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27CB7EF6-F798-48A6-ABDE-4F06E3BE0D08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27CB7EF6-F798-48A6-ABDE-4F06E3BE0D08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27CB7EF6-F798-48A6-ABDE-4F06E3BE0D08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27CB7EF6-F798-48A6-ABDE-4F06E3BE0D08}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7079D014-42CC-484E-B8EB-13FF7E1258D9}
+	EndGlobalSection
+EndGlobal
