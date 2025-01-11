@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace spokodynka_winforms
+﻿namespace spokodynka_winforms
 {
     public partial class ForecastHourBox : UserControl
     {
@@ -17,7 +7,7 @@ namespace spokodynka_winforms
             InitializeComponent();
         }
 
-        public ForecastHourBox(int hour, int temp)
+        public ForecastHourBox(int hour, double temp)
         {
             InitializeComponent();
             this.Margin = new Padding(10);

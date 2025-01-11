@@ -114,7 +114,7 @@
             // currentTempLabel
             // 
             currentTempLabel.Dock = DockStyle.Left;
-            currentTempLabel.Font = new Font("Lucida Sans", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            currentTempLabel.Font = new Font("Lucida Sans", 22F, FontStyle.Regular, GraphicsUnit.Point, 0);
             currentTempLabel.ForeColor = Color.WhiteSmoke;
             currentTempLabel.Location = new Point(287, 0);
             currentTempLabel.Name = "currentTempLabel";

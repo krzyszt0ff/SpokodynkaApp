@@ -64,7 +64,7 @@
             // 
             forecastHourTempLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             forecastHourTempLabel.BackColor = Color.Transparent;
-            forecastHourTempLabel.Font = new Font("Lucida Sans", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            forecastHourTempLabel.Font = new Font("Lucida Sans", 16F, FontStyle.Regular, GraphicsUnit.Point, 0);
             forecastHourTempLabel.ForeColor = Color.WhiteSmoke;
             forecastHourTempLabel.Location = new Point(0, 0);
             forecastHourTempLabel.Name = "forecastHourTempLabel";

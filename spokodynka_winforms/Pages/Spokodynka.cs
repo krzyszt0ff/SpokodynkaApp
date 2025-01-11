@@ -1,6 +1,7 @@
 using ApiCom;
 using FileManagement;
 using Locations;
+using Spokodynka_gui.Pages;
 
 namespace spokodynka_winforms
 {
@@ -9,6 +10,8 @@ namespace spokodynka_winforms
 
         public List<Location> locations = new List<Location>();
         private IFileHandler<XMLHandler> fileHandler = new XMLHandler(); // !!! DO OGARNIECIA: JAK ZROBIC ZEBY NIE BYLO NA SZTYWNO DLA XML (CZY IFILEHANDLER MUSI PRZYJMOWAC ATRYBUT?)
+        public List<PlacePage> loadedPages = new List<PlacePage>();
+        private SettingsPage settingsPage = new SettingsPage() { Dock = DockStyle.Fill };
 
         public Spokodynka()
         {
@@ -61,6 +64,9 @@ namespace spokodynka_winforms
                     Margin = new Padding(10)
                 };
 
+                newPlaceBox.PlaceRemoved += PlaceBox_PlaceRemoved;
+
+                loadedPages.Add(new PlacePage(newPlaceBox.location));
                 newPlaceBox.PlaceSelected += PlaceBox_PlaceSelected;
                 PlaceBoxPanel.Controls.Add(newPlaceBox);
                 PlaceBoxPanel.Controls.SetChildIndex(newPlaceBox, 0);
@@ -72,6 +78,16 @@ namespace spokodynka_winforms
                 MessageBox.Show("B³¹d wyszukiwania!");
             }
         }
+
+        private void PlaceBox_PlaceRemoved(object sender, Location location)
+        {
+            var pageToRemove = loadedPages.FirstOrDefault(page => page.Location.Equals(location));
+            if (pageToRemove != null)
+            {
+                loadedPages.Remove(pageToRemove);
+            }
+        }
+
 
         private void PlaceBox_PlaceSelected(object sender, EventArgs e)
         {
@@ -94,29 +110,52 @@ namespace spokodynka_winforms
 
         private void SidebarLabel_Click(object sender, EventArgs e)
         {
-            foreach(PlaceBox placeBox in PlaceBoxPanel.Controls)
+            foreach (PlaceBox placeBox in PlaceBoxPanel.Controls)
             {
                 placeBox.Deselect();
             }
-            LoadPage();
+            LoadHomePage();
+        }
+
+        public void SetBackgroundImage(Image image) //do usuniecia?? nie wiem czy zmienianie tel nie przekomplikuje wielu rzeczy
+        {
+            this.BackgroundImage = image;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
         }
 
         public void LoadPage(Location location)
         {
             mainContentPanel.Controls.Clear();
 
-            PlacePage placePage = new PlacePage(location)
-            {
-                Dock = DockStyle.Fill
-            };
+            var cachedPage = loadedPages.FirstOrDefault(page => page.Location.Equals(location));
 
-            mainContentPanel.Controls.Add(placePage);
+            if (cachedPage == null)
+            {
+                cachedPage = new PlacePage(location)
+                {
+                    Dock = DockStyle.Fill
+                };
+                loadedPages.Add(cachedPage);
+            }
+
+            mainContentPanel.Controls.Add(cachedPage);
         }
 
-        public void LoadPage()
+        public void LoadHomePage()
         {
             mainContentPanel.Controls.Clear();
             mainContentPanel.Controls.Add(homePage1);
+        }
+
+        public void LoadSettingsPage()
+        {
+            mainContentPanel.Controls.Clear();
+            mainContentPanel.Controls.Add(settingsPage);
+        }
+
+        private void SettingsButton_Click(object sender, EventArgs e)
+        {
+            LoadSettingsPage();
         }
     }
 }

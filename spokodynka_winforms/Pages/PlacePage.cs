@@ -21,7 +21,7 @@ namespace spokodynka_winforms
 
             _apiCom = ApiComFactory.CreateInstance()
                 .SetGeoLocation(location.Lat, location.Lon)
-                .SetForecastDays(5)
+                .SetForecastDays(7)
                 .ReqHourlyTemp()
                 .ReqHourlyHumidity()
                 .ReqHourlyWindspeed()
@@ -35,12 +35,14 @@ namespace spokodynka_winforms
             try
             {
                 List<Record> records = await _apiCom.SendAsync();
+                Record currentRecord = records[0];
 
                 if (records != null && records.Count > 0)
                 {
                     DisplayHourlyData(records);
                     DisplayDailyData(records);
-                    currentTempLabel.Text = records[0].temperature.ToString() + "°C";
+                    currentTempLabel.Text = currentRecord.temperature.ToString() + "°C";
+                    LoadWeatherVisuals(currentRecord);
                 }
             }
             catch (Exception ex)
@@ -49,15 +51,29 @@ namespace spokodynka_winforms
             }
         }
 
+        private void LoadWeatherVisuals(Record record)
+        {
+            if (record.date.Hour > 6 && record.date.Hour > 18) //daytime
+            {
+                currentWeatherPicture.BackgroundImage = Spokodynka_gui.Properties.Resources.sun;
+
+            }
+            else //nighttime
+            {
+                currentWeatherPicture.BackgroundImage = Spokodynka_gui.Properties.Resources.moon;
+            }
+
+        }
+
         private void DisplayHourlyData(List<Record> records)
         {
-            // Pobranie pierwszych 12 rekordów do wyświetlenia godzinowego
             var hourlyRecords = records.Take(12).ToList();
+            int hour = DateTime.Now.Hour; // nie wiem czy tego uzyc czy wartosci z api bo wartosc z api chyba nie dziala
 
             foreach (var record in hourlyRecords)
             {
-                int hour = record.date.Hour;
-                int temp = record.temperature.HasValue ? (int)record.temperature.Value : 0;
+                //int hour = record.date.Hour;
+                double temp = record.temperature.HasValue ? (double)record.temperature.Value : 0;
 
                 ForecastHourBox newforecastHourBox = new ForecastHourBox(hour, temp)
                 {
@@ -65,11 +81,14 @@ namespace spokodynka_winforms
                     Margin = new Padding(10)
                 };
 
+                hour = (hour + 1) % 24;
+
                 newforecastHourBox.Dock = DockStyle.Left;
                 hourlyForecastPanel.Controls.Add(newforecastHourBox);
                 hourlyForecastPanel.Controls.SetChildIndex(newforecastHourBox, 0);
             }
         }
+
 
         private void DisplayDailyData(List<Record> records)
         {

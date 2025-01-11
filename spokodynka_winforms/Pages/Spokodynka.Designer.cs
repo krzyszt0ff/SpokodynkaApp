@@ -31,14 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Spokodynka));
             MainSidebarPanel = new Panel();
             PlaceBoxPanel = new Panel();
+            SettingsPanel = new Panel();
+            SettingsButton = new Button();
             PlaceAddPanel = new Panel();
             PlaceAddBtn = new Button();
             PlaceTextbox = new TextBox();
             SidebarLabel = new Label();
             mainContentPanel = new Panel();
             homePage1 = new HomePage();
-            SettingsPanel = new Panel();
             MainSidebarPanel.SuspendLayout();
+            SettingsPanel.SuspendLayout();
             PlaceAddPanel.SuspendLayout();
             mainContentPanel.SuspendLayout();
             SuspendLayout();
@@ -54,7 +56,7 @@
             MainSidebarPanel.Dock = DockStyle.Left;
             MainSidebarPanel.Location = new Point(0, 0);
             MainSidebarPanel.Name = "MainSidebarPanel";
-            MainSidebarPanel.Size = new Size(250, 544);
+            MainSidebarPanel.Size = new Size(300, 544);
             MainSidebarPanel.TabIndex = 0;
             // 
             // PlaceBoxPanel
@@ -64,8 +66,31 @@
             PlaceBoxPanel.Dock = DockStyle.Fill;
             PlaceBoxPanel.Location = new Point(0, 102);
             PlaceBoxPanel.Name = "PlaceBoxPanel";
-            PlaceBoxPanel.Size = new Size(250, 392);
+            PlaceBoxPanel.Size = new Size(300, 392);
             PlaceBoxPanel.TabIndex = 4;
+            // 
+            // SettingsPanel
+            // 
+            SettingsPanel.AutoScroll = true;
+            SettingsPanel.BackColor = Color.FromArgb(100, 255, 255, 255);
+            SettingsPanel.Controls.Add(SettingsButton);
+            SettingsPanel.Dock = DockStyle.Bottom;
+            SettingsPanel.Location = new Point(0, 494);
+            SettingsPanel.Name = "SettingsPanel";
+            SettingsPanel.Size = new Size(300, 50);
+            SettingsPanel.TabIndex = 5;
+            // 
+            // SettingsButton
+            // 
+            SettingsButton.BackgroundImage = (Image)resources.GetObject("SettingsButton.BackgroundImage");
+            SettingsButton.BackgroundImageLayout = ImageLayout.Stretch;
+            SettingsButton.Dock = DockStyle.Left;
+            SettingsButton.Location = new Point(0, 0);
+            SettingsButton.Name = "SettingsButton";
+            SettingsButton.Size = new Size(50, 50);
+            SettingsButton.TabIndex = 0;
+            SettingsButton.UseVisualStyleBackColor = true;
+            SettingsButton.Click += SettingsButton_Click;
             // 
             // PlaceAddPanel
             // 
@@ -74,13 +99,13 @@
             PlaceAddPanel.Dock = DockStyle.Top;
             PlaceAddPanel.Location = new Point(0, 52);
             PlaceAddPanel.Name = "PlaceAddPanel";
-            PlaceAddPanel.Size = new Size(250, 50);
+            PlaceAddPanel.Size = new Size(300, 50);
             PlaceAddPanel.TabIndex = 3;
             // 
             // PlaceAddBtn
             // 
             PlaceAddBtn.Anchor = AnchorStyles.Right;
-            PlaceAddBtn.Location = new Point(210, 7);
+            PlaceAddBtn.Location = new Point(260, 7);
             PlaceAddBtn.Name = "PlaceAddBtn";
             PlaceAddBtn.Size = new Size(37, 37);
             PlaceAddBtn.TabIndex = 2;
@@ -95,7 +120,7 @@
             PlaceTextbox.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 238);
             PlaceTextbox.Location = new Point(5, 7);
             PlaceTextbox.Name = "PlaceTextbox";
-            PlaceTextbox.Size = new Size(199, 37);
+            PlaceTextbox.Size = new Size(249, 37);
             PlaceTextbox.TabIndex = 2;
             PlaceTextbox.Text = "Wyszukaj miasto...";
             PlaceTextbox.Enter += PlaceTextbox_Enter;
@@ -108,7 +133,7 @@
             SidebarLabel.ForeColor = Color.DimGray;
             SidebarLabel.Location = new Point(0, 0);
             SidebarLabel.Name = "SidebarLabel";
-            SidebarLabel.Size = new Size(250, 52);
+            SidebarLabel.Size = new Size(300, 52);
             SidebarLabel.TabIndex = 2;
             SidebarLabel.Text = "Spokodynka";
             SidebarLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -119,9 +144,9 @@
             mainContentPanel.BackColor = Color.Transparent;
             mainContentPanel.Controls.Add(homePage1);
             mainContentPanel.Dock = DockStyle.Fill;
-            mainContentPanel.Location = new Point(250, 0);
+            mainContentPanel.Location = new Point(300, 0);
             mainContentPanel.Name = "mainContentPanel";
-            mainContentPanel.Size = new Size(728, 544);
+            mainContentPanel.Size = new Size(678, 544);
             mainContentPanel.TabIndex = 1;
             // 
             // homePage1
@@ -130,24 +155,14 @@
             homePage1.Dock = DockStyle.Fill;
             homePage1.Location = new Point(0, 0);
             homePage1.Name = "homePage1";
-            homePage1.Size = new Size(728, 544);
+            homePage1.Size = new Size(678, 544);
             homePage1.TabIndex = 0;
-            // 
-            // SettingsPanel
-            // 
-            SettingsPanel.AutoScroll = true;
-            SettingsPanel.BackColor = Color.FromArgb(100, 255, 255, 255);
-            SettingsPanel.Dock = DockStyle.Bottom;
-            SettingsPanel.Location = new Point(0, 494);
-            SettingsPanel.Name = "SettingsPanel";
-            SettingsPanel.Size = new Size(250, 50);
-            SettingsPanel.TabIndex = 5;
             // 
             // Spokodynka
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
             BackColor = Color.LightSkyBlue;
-            BackgroundImage = Spokodynka_gui.Properties.Resources.bg1;
+            BackgroundImage = Spokodynka_gui.Properties.Resources.bg;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(978, 544);
             Controls.Add(mainContentPanel);
@@ -156,8 +171,8 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Spokodynka";
             Text = "Spokodynka";
-            Resize += Spokodynka_Resize;
             MainSidebarPanel.ResumeLayout(false);
+            SettingsPanel.ResumeLayout(false);
             PlaceAddPanel.ResumeLayout(false);
             PlaceAddPanel.PerformLayout();
             mainContentPanel.ResumeLayout(false);
@@ -175,5 +190,6 @@
         private Panel mainContentPanel;
         private HomePage homePage1;
         private Panel SettingsPanel;
+        private Button SettingsButton;
     }
 }

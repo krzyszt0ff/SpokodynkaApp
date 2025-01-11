@@ -8,6 +8,7 @@ namespace spokodynka_winforms
         public static PlaceBox selectedPlaceBox = null;
         public event EventHandler PlaceSelected;
         public Location location;
+        public event EventHandler<Location> PlaceRemoved;
         public PlaceBox()
         {
             InitializeComponent();
@@ -31,6 +32,8 @@ namespace spokodynka_winforms
             this.Parent?.Controls.Remove(this);
             if (selectedPlaceBox == this)
                 selectedPlaceBox = null;
+
+            PlaceRemoved?.Invoke(this, location);
         }
 
         private void nameLabel_Click(object sender, EventArgs e)
