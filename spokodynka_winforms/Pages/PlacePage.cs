@@ -43,6 +43,10 @@ namespace spokodynka_winforms
                     DisplayDailyData(records);
                     currentTempLabel.Text = currentRecord.temperature.ToString() + "°C";
                     LoadWeatherVisuals(currentRecord);
+                    weatherInfoLabel.Text += (currentRecord.windspeed is not null) ? "Prędkość wiatru: " + currentRecord.windspeed + " m/s\n\n" : "";
+                    weatherInfoLabel.Text += (currentRecord.prec is not null) ? "Prawdopodobieństwo opadu: " + currentRecord.prec.probability + "%\n\n" : "";
+                    weatherInfoLabel.Text += (currentRecord.surfacepressure is not null) ? "Ciśnienie: " + currentRecord.surfacepressure + "hPa\n\n" : "";
+                    weatherInfoLabel.Text += (currentRecord.humidity is not null) ? "Wilgotność: " + currentRecord.humidity + "%\n\n" : "";
                 }
             }
             catch (Exception ex)

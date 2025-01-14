@@ -30,7 +30,7 @@
         {
             forecastDaysPanel = new Panel();
             placePageBackPanel = new Panel();
-            label1 = new Label();
+            weatherInfoLabel = new Label();
             hourlyForecastPanel = new Panel();
             currentWeatherPanel = new TableLayoutPanel();
             currentWeatherPicture = new PictureBox();
@@ -54,7 +54,7 @@
             // placePageBackPanel
             // 
             placePageBackPanel.AutoScroll = true;
-            placePageBackPanel.Controls.Add(label1);
+            placePageBackPanel.Controls.Add(weatherInfoLabel);
             placePageBackPanel.Controls.Add(hourlyForecastPanel);
             placePageBackPanel.Controls.Add(currentWeatherPanel);
             placePageBackPanel.Controls.Add(placePageName);
@@ -64,17 +64,17 @@
             placePageBackPanel.Size = new Size(569, 671);
             placePageBackPanel.TabIndex = 2;
             // 
-            // label1
+            // weatherInfoLabel
             // 
-            label1.AutoSize = true;
-            label1.Dock = DockStyle.Top;
-            label1.Font = new Font("Lucida Console", 14F, FontStyle.Regular, GraphicsUnit.Point, 238);
-            label1.ForeColor = Color.WhiteSmoke;
-            label1.Location = new Point(0, 408);
-            label1.Name = "label1";
-            label1.Size = new Size(284, 252);
-            label1.TabIndex = 5;
-            label1.Text = "\r\nPrędkość wiatru:\r\n\r\nOpady:\r\n\r\nWilgotność:\r\n\r\nCiśnienie:\r\n\r\n";
+            weatherInfoLabel.AutoSize = true;
+            weatherInfoLabel.Dock = DockStyle.Top;
+            weatherInfoLabel.Font = new Font("Lucida Console", 14F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            weatherInfoLabel.ForeColor = Color.WhiteSmoke;
+            weatherInfoLabel.Location = new Point(0, 408);
+            weatherInfoLabel.Name = "weatherInfoLabel";
+            weatherInfoLabel.Padding = new Padding(0, 20, 0, 0);
+            weatherInfoLabel.Size = new Size(0, 48);
+            weatherInfoLabel.TabIndex = 5;
             // 
             // hourlyForecastPanel
             // 
@@ -162,6 +162,6 @@
         private Label currentTempLabel;
         private TableLayoutPanel currentWeatherPanel;
         private Panel hourlyForecastPanel;
-        private Label label1;
+        private Label weatherInfoLabel;
     }
 }
