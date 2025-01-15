@@ -10,8 +10,8 @@ namespace spokodynka_winforms
 
         public List<Location> locations = new List<Location>();
         private IFileHandler<XMLHandler> fileHandler = new XMLHandler(); // !!! DO OGARNIECIA: JAK ZROBIC ZEBY NIE BYLO NA SZTYWNO DLA XML (CZY IFILEHANDLER MUSI PRZYJMOWAC ATRYBUT?)
-        public List<PlacePage> loadedPages = new List<PlacePage>();
-        private SettingsPage settingsPage = new SettingsPage() { Dock = DockStyle.Fill };
+        public static List<PlacePage> loadedPages = new List<PlacePage>();
+        private static SettingsPage settingsPage = new SettingsPage() { Dock = DockStyle.Fill };
 
         public Spokodynka()
         {
@@ -34,11 +34,6 @@ namespace spokodynka_winforms
         private Location findPlace(string query)
         {
             return locations.FirstOrDefault(loc => loc.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0); ///Wyszukiwanie do poprawienia!!! Za bardzo wyszukuje,,,,,
-        }
-
-        private void Spokodynka_Resize(object sender, EventArgs e)
-        {
-            MainSidebarPanel.Width = (int)(this.ClientSize.Width * 0.25);
         }
 
         private void addPlaceBox()
@@ -65,8 +60,7 @@ namespace spokodynka_winforms
                 };
 
                 newPlaceBox.PlaceRemoved += PlaceBox_PlaceRemoved;
-
-                loadedPages.Add(new PlacePage(newPlaceBox.location));
+                loadedPages.Add(new PlacePage(newPlaceBox.location) { Dock = DockStyle.Fill});
                 newPlaceBox.PlaceSelected += PlaceBox_PlaceSelected;
                 PlaceBoxPanel.Controls.Add(newPlaceBox);
                 PlaceBoxPanel.Controls.SetChildIndex(newPlaceBox, 0);
@@ -110,17 +104,16 @@ namespace spokodynka_winforms
 
         private void SidebarLabel_Click(object sender, EventArgs e)
         {
+            DeselectAllPlaceBoxes();
+            LoadHomePage();
+        }
+
+        private void DeselectAllPlaceBoxes()
+        {
             foreach (PlaceBox placeBox in PlaceBoxPanel.Controls)
             {
                 placeBox.Deselect();
             }
-            LoadHomePage();
-        }
-
-        public void SetBackgroundImage(Image image) //do usuniecia?? nie wiem czy zmienianie tel nie przekomplikuje wielu rzeczy
-        {
-            this.BackgroundImage = image;
-            this.BackgroundImageLayout = ImageLayout.Stretch;
         }
 
         public void LoadPage(Location location)
@@ -128,13 +121,13 @@ namespace spokodynka_winforms
             mainContentPanel.Controls.Clear();
 
             var cachedPage = loadedPages.FirstOrDefault(page => page.Location.Equals(location));
-
             if (cachedPage == null)
             {
                 cachedPage = new PlacePage(location)
                 {
                     Dock = DockStyle.Fill
                 };
+
                 loadedPages.Add(cachedPage);
             }
 
@@ -149,6 +142,7 @@ namespace spokodynka_winforms
 
         public void LoadSettingsPage()
         {
+            DeselectAllPlaceBoxes();
             mainContentPanel.Controls.Clear();
             mainContentPanel.Controls.Add(settingsPage);
         }
@@ -156,6 +150,23 @@ namespace spokodynka_winforms
         private void SettingsButton_Click(object sender, EventArgs e)
         {
             LoadSettingsPage();
+        }
+
+        private void PlaceTextbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                addPlaceBox();
+            }
+        }
+
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            loadedPages.Clear();
+            foreach (PlaceBox place in PlaceBoxPanel.Controls)
+            {
+                loadedPages.Add(new PlacePage(place.location) {Dock = DockStyle.Fill});
+            }
         }
     }
 }

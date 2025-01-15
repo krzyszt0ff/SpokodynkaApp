@@ -39,6 +39,7 @@
             SidebarLabel = new Label();
             mainContentPanel = new Panel();
             homePage1 = new HomePage();
+            refreshButton = new Button();
             MainSidebarPanel.SuspendLayout();
             SettingsPanel.SuspendLayout();
             PlaceAddPanel.SuspendLayout();
@@ -73,6 +74,7 @@
             // 
             SettingsPanel.AutoScroll = true;
             SettingsPanel.BackColor = Color.FromArgb(100, 255, 255, 255);
+            SettingsPanel.Controls.Add(refreshButton);
             SettingsPanel.Controls.Add(SettingsButton);
             SettingsPanel.Dock = DockStyle.Bottom;
             SettingsPanel.Location = new Point(0, 494);
@@ -124,6 +126,7 @@
             PlaceTextbox.TabIndex = 2;
             PlaceTextbox.Text = "Wyszukaj miasto...";
             PlaceTextbox.Enter += PlaceTextbox_Enter;
+            PlaceTextbox.KeyDown += PlaceTextbox_KeyDown;
             // 
             // SidebarLabel
             // 
@@ -158,6 +161,18 @@
             homePage1.Size = new Size(678, 544);
             homePage1.TabIndex = 0;
             // 
+            // refreshButton
+            // 
+            refreshButton.BackgroundImage = (Image)resources.GetObject("refreshButton.BackgroundImage");
+            refreshButton.BackgroundImageLayout = ImageLayout.Stretch;
+            refreshButton.Dock = DockStyle.Left;
+            refreshButton.Location = new Point(50, 0);
+            refreshButton.Name = "refreshButton";
+            refreshButton.Size = new Size(50, 50);
+            refreshButton.TabIndex = 1;
+            refreshButton.UseVisualStyleBackColor = true;
+            refreshButton.Click += refreshButton_Click;
+            // 
             // Spokodynka
             // 
             AutoScaleMode = AutoScaleMode.Inherit;
@@ -191,5 +206,6 @@
         private HomePage homePage1;
         private Panel SettingsPanel;
         private Button SettingsButton;
+        private Button refreshButton;
     }
 }

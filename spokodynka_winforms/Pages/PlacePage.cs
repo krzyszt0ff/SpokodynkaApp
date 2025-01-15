@@ -1,5 +1,6 @@
 ﻿using Locations;
 using ApiCom;
+using Spokodynka_gui.Pages;
 
 namespace spokodynka_winforms
 {
@@ -7,11 +8,9 @@ namespace spokodynka_winforms
     {
         private readonly IApiCom _apiCom;
         private Location location;
+        public List<Record> records;
 
-        public PlacePage()
-        {
-            InitializeComponent();
-        }
+        public Location Location => location;
 
         public PlacePage(Location location)
         {
@@ -21,7 +20,7 @@ namespace spokodynka_winforms
 
             _apiCom = ApiComFactory.CreateInstance()
                 .SetGeoLocation(location.Lat, location.Lon)
-                .SetForecastDays(7)
+                .SetForecastDays(SettingsPage.forecastDays)
                 .ReqHourlyTemp()
                 .ReqHourlyHumidity()
                 .ReqHourlyWindspeed()
@@ -30,21 +29,21 @@ namespace spokodynka_winforms
             LoadWeatherDataAsync();
         }
 
-        private async void LoadWeatherDataAsync()
+        public async void LoadWeatherDataAsync()
         {
             try
             {
-                List<Record> records = await _apiCom.SendAsync();
-                Record currentRecord = records[0];
+                records = await _apiCom.SendAsync();
 
                 if (records != null && records.Count > 0)
                 {
+                    Record currentRecord = records[0];
                     DisplayHourlyData(records);
                     DisplayDailyData(records);
                     currentTempLabel.Text = currentRecord.temperature.ToString() + "°C";
                     LoadWeatherVisuals(currentRecord);
                     weatherInfoLabel.Text += (currentRecord.windspeed is not null) ? "Prędkość wiatru: " + currentRecord.windspeed + " m/s\n\n" : "";
-                    weatherInfoLabel.Text += (currentRecord.prec is not null) ? "Prawdopodobieństwo opadu: " + currentRecord.prec.probability + "%\n\n" : "";
+                    weatherInfoLabel.Text += (currentRecord.prec is not null) ? "Opady: " + currentRecord.prec.probability + "%\n\n" : "";
                     weatherInfoLabel.Text += (currentRecord.surfacepressure is not null) ? "Ciśnienie: " + currentRecord.surfacepressure + "hPa\n\n" : "";
                     weatherInfoLabel.Text += (currentRecord.humidity is not null) ? "Wilgotność: " + currentRecord.humidity + "%\n\n" : "";
                 }
@@ -104,7 +103,7 @@ namespace spokodynka_winforms
                     TempMin = g.Min(r => r.temperature) ?? 0,
                     TempMax = g.Max(r => r.temperature) ?? 0
                 })
-                .Take(5);
+                .Take(SettingsPage.forecastDays);
 
             foreach (var day in dailyData)
             {
