@@ -1,4 +1,6 @@
-﻿namespace Spokodynka_gui.Pages
+﻿using FileManagement;
+
+namespace Spokodynka_gui.Pages
 {
     partial class SettingsPage
     {
@@ -43,12 +45,13 @@
             // settingsPageHeader
             // 
             settingsPageHeader.Dock = DockStyle.Top;
-            settingsPageHeader.Font = new Font("Lucida Sans", 24F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            settingsPageHeader.Font = new Font("Microsoft Sans Serif", 24F, FontStyle.Underline, GraphicsUnit.Point, 0);
             settingsPageHeader.ForeColor = Color.WhiteSmoke;
             settingsPageHeader.Location = new Point(0, 0);
+            settingsPageHeader.Margin = new Padding(2, 0, 2, 0);
             settingsPageHeader.Name = "settingsPageHeader";
-            settingsPageHeader.Padding = new Padding(10, 20, 0, 0);
-            settingsPageHeader.Size = new Size(803, 86);
+            settingsPageHeader.Padding = new Padding(8, 16, 0, 0);
+            settingsPageHeader.Size = new Size(642, 69);
             settingsPageHeader.TabIndex = 3;
             settingsPageHeader.Text = "Ustawienia";
             // 
@@ -63,47 +66,53 @@
             mainSettingsPanel.Controls.Add(forecastDaySelect);
             mainSettingsPanel.Controls.Add(forecastDayLabel);
             mainSettingsPanel.Dock = DockStyle.Fill;
-            mainSettingsPanel.Location = new Point(0, 86);
+            mainSettingsPanel.Location = new Point(0, 69);
+            mainSettingsPanel.Margin = new Padding(2, 2, 2, 2);
             mainSettingsPanel.Name = "mainSettingsPanel";
-            mainSettingsPanel.Padding = new Padding(20, 0, 0, 0);
-            mainSettingsPanel.Size = new Size(803, 343);
+            mainSettingsPanel.Padding = new Padding(16, 0, 0, 0);
+            mainSettingsPanel.Size = new Size(642, 274);
             mainSettingsPanel.TabIndex = 5;
             // 
             // exportBtn
             // 
-            exportBtn.Location = new Point(542, 96);
+            exportBtn.Location = new Point(434, 77);
+            exportBtn.Margin = new Padding(2, 2, 2, 2);
             exportBtn.Name = "exportBtn";
-            exportBtn.Size = new Size(112, 34);
+            exportBtn.Size = new Size(90, 27);
             exportBtn.TabIndex = 8;
             exportBtn.Text = "Eksport";
             exportBtn.UseVisualStyleBackColor = true;
+            exportBtn.Click += exportBtn_Click;
             // 
             // exportPlaceSelect
             // 
             exportPlaceSelect.FormatString = "N0";
-            exportPlaceSelect.Location = new Point(408, 96);
+            exportPlaceSelect.Location = new Point(326, 77);
+            exportPlaceSelect.Margin = new Padding(2, 2, 2, 2);
             exportPlaceSelect.Name = "exportPlaceSelect";
-            exportPlaceSelect.Size = new Size(128, 33);
+            exportPlaceSelect.Size = new Size(103, 28);
             exportPlaceSelect.TabIndex = 7;
             exportPlaceSelect.Text = "(miasto)";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Lucida Sans", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.WhiteSmoke;
-            label1.Location = new Point(23, 87);
+            label1.Location = new Point(18, 70);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Padding = new Padding(0, 10, 0, 0);
-            label1.Size = new Size(379, 42);
+            label1.Padding = new Padding(0, 8, 0, 0);
+            label1.Size = new Size(298, 37);
             label1.TabIndex = 6;
             label1.Text = "Wyeksportuj prognozę dla:";
             // 
             // importBtn
             // 
-            importBtn.Location = new Point(330, 53);
+            importBtn.Location = new Point(264, 42);
+            importBtn.Margin = new Padding(2, 2, 2, 2);
             importBtn.Name = "importBtn";
-            importBtn.Size = new Size(112, 34);
+            importBtn.Size = new Size(90, 27);
             importBtn.TabIndex = 5;
             importBtn.Text = "Import";
             importBtn.UseVisualStyleBackColor = true;
@@ -112,46 +121,49 @@
             // importLabel
             // 
             importLabel.AutoSize = true;
-            importLabel.Font = new Font("Lucida Sans", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            importLabel.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
             importLabel.ForeColor = Color.WhiteSmoke;
-            importLabel.Location = new Point(23, 45);
+            importLabel.Location = new Point(18, 36);
+            importLabel.Margin = new Padding(2, 0, 2, 0);
             importLabel.Name = "importLabel";
-            importLabel.Padding = new Padding(0, 10, 0, 0);
-            importLabel.Size = new Size(301, 42);
+            importLabel.Padding = new Padding(0, 8, 0, 0);
+            importLabel.Size = new Size(227, 37);
             importLabel.TabIndex = 4;
             importLabel.Text = "Importuj bazę miast:";
             // 
             // forecastDaySelect
             // 
             forecastDaySelect.FormatString = "N0";
-            forecastDaySelect.Location = new Point(304, 9);
+            forecastDaySelect.Location = new Point(243, 7);
+            forecastDaySelect.Margin = new Padding(2, 2, 2, 2);
             forecastDaySelect.Name = "forecastDaySelect";
-            forecastDaySelect.Size = new Size(73, 33);
+            forecastDaySelect.Size = new Size(59, 28);
             forecastDaySelect.TabIndex = 3;
             forecastDaySelect.SelectedIndexChanged += forecastDaySelect_SelectedIndexChanged;
             // 
             // forecastDayLabel
             // 
             forecastDayLabel.AutoSize = true;
-            forecastDayLabel.Font = new Font("Lucida Sans", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            forecastDayLabel.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Regular, GraphicsUnit.Point, 0);
             forecastDayLabel.ForeColor = Color.WhiteSmoke;
-            forecastDayLabel.Location = new Point(23, 0);
+            forecastDayLabel.Location = new Point(18, 0);
+            forecastDayLabel.Margin = new Padding(2, 0, 2, 0);
             forecastDayLabel.Name = "forecastDayLabel";
-            forecastDayLabel.Padding = new Padding(0, 10, 0, 0);
-            forecastDayLabel.Size = new Size(275, 42);
+            forecastDayLabel.Padding = new Padding(0, 8, 0, 0);
+            forecastDayLabel.Size = new Size(213, 37);
             forecastDayLabel.TabIndex = 2;
             forecastDayLabel.Text = "Ilość dni prognozy:";
             // 
             // SettingsPage
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Transparent;
             Controls.Add(mainSettingsPanel);
             Controls.Add(settingsPageHeader);
-            Margin = new Padding(10, 3, 3, 3);
+            Margin = new Padding(8, 2, 2, 2);
             Name = "SettingsPage";
-            Size = new Size(803, 429);
+            Size = new Size(642, 343);
             mainSettingsPanel.ResumeLayout(false);
             mainSettingsPanel.PerformLayout();
             ResumeLayout(false);
@@ -168,5 +180,6 @@
         private Label importLabel;
         private Button exportBtn;
         private ComboBox exportPlaceSelect;
+
     }
 }

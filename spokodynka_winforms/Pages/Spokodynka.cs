@@ -12,6 +12,13 @@ namespace spokodynka_winforms
         private IFileHandler<XMLHandler> fileHandler = new XMLHandler(); // !!! DO OGARNIECIA: JAK ZROBIC ZEBY NIE BYLO NA SZTYWNO DLA XML (CZY IFILEHANDLER MUSI PRZYJMOWAC ATRYBUT?)
         public static List<PlacePage> loadedPages = new List<PlacePage>();
         private static SettingsPage settingsPage = new SettingsPage() { Dock = DockStyle.Fill };
+        private readonly string path = Path.Combine( //prywatna zmienna na sciezke!!!!!!
+            Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.Parent.FullName,
+            "WeatherLogic",
+            "LocData",
+            "GeoLocations_Data.xml"
+        );
+
 
         public Spokodynka()
         {
@@ -23,7 +30,7 @@ namespace spokodynka_winforms
         {
             try
             {
-                locations = fileHandler.LoadData("GeoLocations_Data"); // Nazwa tymczasowa, potem zrobic jakos zeby bralo to jako domyslna ale wprowadzic to jako domyslna I guess??
+                locations = fileHandler.LoadData(path); // Nazwa tymczasowa, potem zrobic jakos zeby bralo to jako domyslna ale wprowadzic to jako domyslna I guess??
             }
             catch (Exception ex)
             {
@@ -60,10 +67,11 @@ namespace spokodynka_winforms
                 };
 
                 newPlaceBox.PlaceRemoved += PlaceBox_PlaceRemoved;
-                loadedPages.Add(new PlacePage(newPlaceBox.location) { Dock = DockStyle.Fill});
+                loadedPages.Add(new PlacePage(newPlaceBox.location) { Dock = DockStyle.Fill });
                 newPlaceBox.PlaceSelected += PlaceBox_PlaceSelected;
                 PlaceBoxPanel.Controls.Add(newPlaceBox);
                 PlaceBoxPanel.Controls.SetChildIndex(newPlaceBox, 0);
+                settingsPage.AddExportPlace(PlaceName);
 
                 PlaceTextbox.Clear();
             }
@@ -165,8 +173,9 @@ namespace spokodynka_winforms
             loadedPages.Clear();
             foreach (PlaceBox place in PlaceBoxPanel.Controls)
             {
-                loadedPages.Add(new PlacePage(place.location) {Dock = DockStyle.Fill});
+                loadedPages.Add(new PlacePage(place.location) { Dock = DockStyle.Fill });
             }
         }
+
     }
 }

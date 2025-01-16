@@ -37,14 +37,14 @@ namespace FileManagement
 
 
 
-
+        //AAAAAAAAAAAAAAAAAAA
         /// <summary>
         /// Load data from {filename} path , .xml format is already specified
         /// </summary>
-        public List<Location> LoadData(string filename)
+        public List<Location> LoadData(string filepath)
         {
             XmlDocument document = new XmlDocument();
-            document.Load(Path.Combine(path, filename + ".xml"));
+            document.Load(filepath);
             XmlNodeList locationNoodes = document.SelectNodes("/root/row");
 
             List<Location> locations = new List<Location>();
@@ -86,7 +86,7 @@ namespace FileManagement
         /// <summary>
         /// Save data to {filename} path , .xml format is already specified. Would overwrite existing files!
         /// </summary>
-        public bool SaveData(string filename, List<Location> locations)
+        public bool SaveData(string filepath, List<Location> locations)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace FileManagement
                     AppendToDocument(location, document, rootElement);
                 }
 
-                document.Save(Path.Combine(path, filename + ".xml"));
+                document.Save(filepath);
                 return true;
             }catch(Exception ex)
             {
@@ -120,13 +120,16 @@ namespace FileManagement
         /// <summary>
         /// Append data to {filename} path , .xml format is already specified. If filename does not exist, it creates a new file with single entry
         /// </summary>
-        public XMLHandler AppendToFile(string filename, Location location)
+        public XMLHandler AppendToFile(string filepath, Location location)
         {
             XmlDocument document = new XmlDocument();
             XmlElement rootElement;
 
-            if(File.Exists(Path.Combine(path, filename + ".xml"))){
-                document.Load(Path.Combine(path, filename + ".xml"));
+            //if(File.Exists(Path.Combine(path, filename + ".xml"))){
+            if (File.Exists(filepath))
+            {
+                //document.Load(Path.Combine(path, filename + ".xml"));
+                document.Load(filepath);
                 rootElement = (XmlElement)document.SelectSingleNode("/root");
             }
             else
@@ -138,7 +141,8 @@ namespace FileManagement
 
 
             AppendToDocument(location, document, rootElement);
-            document.Save(Path.Combine(path, filename + ".xml"));
+            //document.Save(Path.Combine(path, filename + ".xml"));
+            document.Save(filepath);
             return this;
         }
 
@@ -147,7 +151,7 @@ namespace FileManagement
         // Private function to be reused in SaveData and AppendToFile
         private XMLHandler AppendToDocument(Location location ,XmlDocument document, XmlElement rootElement)
         {
-            XmlElement row = document.CreateElement(string.Empty, "roow", string.Empty);
+            XmlElement row = document.CreateElement(string.Empty, "row", string.Empty);
             rootElement.AppendChild(row);
 
             XmlElement miasto = document.CreateElement(string.Empty, "miasto", string.Empty);
@@ -185,7 +189,7 @@ namespace FileManagement
         public List<Location> LoadData(string filepath)
         {
 
-            string fullFilePath = Path.Combine(path, filepath + ".csv");
+            string fullFilePath = Path.Combine(filepath);
 
             if (File.Exists(fullFilePath))
             {
@@ -281,7 +285,7 @@ namespace FileManagement
         private readonly string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Exports/");
         private StreamWriter writer;
 
-        public void Export(string filename ,Record weather, Location place)
+        public void Export(string filepath, Record weather, Location place)
         {
             try
             {
@@ -300,7 +304,7 @@ namespace FileManagement
                     System.IO.Directory.CreateDirectory(path);
                 }
 
-                writer = new StreamWriter(Path.Combine(path, filename + ".txt"));
+                writer = new StreamWriter(filepath);
 
                 writer.WriteLine($"---{place.Name}---");
                 writer.WriteLine($"Latitude and longitude: {place.Lat} : {place.Lon}");
