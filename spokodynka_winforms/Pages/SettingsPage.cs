@@ -68,15 +68,11 @@ namespace Spokodynka_gui.Pages
             {
                 string filePath = ofd.FileName;
 
-                // Obsługuje pliki XML i CSV
                 if (filePath.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
                 {
-                    // Ładowanie danych z pliku XML
                     XMLHandler xmlHandler = new XMLHandler();
                     List<Location> importedLocations = xmlHandler.LoadData(filePath);
 
-                    // Dodanie danych do głównego pliku GeoLocations_Data.xml
-                    //string mainFilePath = "GeoLocations_Data"; // nazwa głównego pliku XML
                     foreach (var location in importedLocations)
                     {
                         xmlHandler.AppendToFile(path, location);
@@ -84,12 +80,9 @@ namespace Spokodynka_gui.Pages
                 }
                 else if (filePath.EndsWith(".csv", StringComparison.OrdinalIgnoreCase))
                 {
-                    // Ładowanie danych z pliku CSV
                     CSVHandler csvHandler = new CSVHandler();
                     List<Location> importedLocations = csvHandler.LoadData(Path.GetFileNameWithoutExtension(filePath));
 
-                    // Dodanie danych do głównego pliku GeoLocations_Data.xml
-                    //string mainFilePath = "GeoLocations_Data"; // nazwa głównego pliku XML
                     XMLHandler xmlHandler = new XMLHandler();
                     foreach (var location in importedLocations)
                     {
@@ -103,7 +96,6 @@ namespace Spokodynka_gui.Pages
         {
             string placeName = exportPlaceSelect.SelectedItem?.ToString();
 
-            // Znajdź lokalizację na podstawie nazwy miasta
             Location location = spokodynka.locations.FirstOrDefault(loc => loc.Name.Equals(placeName, StringComparison.OrdinalIgnoreCase));
             if (placeName == null)
             {
@@ -111,14 +103,13 @@ namespace Spokodynka_gui.Pages
                 return;
             }
 
-            // Wyświetl dialog zapisu
             SaveFileDialog sfd = new SaveFileDialog
             {
                 InitialDirectory = "c:\\",
                 Filter = "XML files (*.xml)|*.xml|CSV files (*.csv)|*.csv|Text files (*.txt)|*.txt",
                 FilterIndex = 1,
                 RestoreDirectory = true,
-                FileName = $"{placeName}_forecast.{forecastDays}" // Proponowana nazwa pliku
+                FileName = $"{placeName}_forecast.{forecastDays}"
             };
 
             if (sfd.ShowDialog() == DialogResult.OK)
@@ -128,7 +119,6 @@ namespace Spokodynka_gui.Pages
 
                 try
                 {
-                    // W zależności od wybranego formatu pliku, zapisz dane
                     switch (fileExtension)
                     {
                         case ".xml":
