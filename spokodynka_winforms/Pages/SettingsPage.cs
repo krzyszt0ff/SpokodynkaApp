@@ -17,7 +17,7 @@ namespace Spokodynka_gui.Pages
 {
     public partial class SettingsPage : UserControl
     {
-        private Spokodynka spokodynka = new Spokodynka();
+        private Spokodynka spokodynka;
         public static int forecastDays { get; set; } = 5;
 
         private readonly string path = Path.Combine( //prywatna zmienna na sciezke!!!!!!
@@ -27,9 +27,10 @@ namespace Spokodynka_gui.Pages
             "GeoLocations_Data.xml"
         );
 
-        public SettingsPage()
+        public SettingsPage(Spokodynka spokodynkaInstance)
         {
             InitializeComponent();
+            spokodynka = spokodynkaInstance;
 
             for (int i = 0; i <= 16; i++)
             {
@@ -76,6 +77,7 @@ namespace Spokodynka_gui.Pages
                     foreach (var location in importedLocations)
                     {
                         xmlHandler.AppendToFile(path, location);
+                        spokodynka.LoadLocations();
                     }
                 }
                 else if (filePath.EndsWith(".csv", StringComparison.OrdinalIgnoreCase))
@@ -87,6 +89,7 @@ namespace Spokodynka_gui.Pages
                     foreach (var location in importedLocations)
                     {
                         xmlHandler.AppendToFile(path, location);
+                        spokodynka.LoadLocations();
                     }
                 }
             }
@@ -96,17 +99,22 @@ namespace Spokodynka_gui.Pages
         {
             string placeName = exportPlaceSelect.SelectedItem?.ToString();
 
-            Location location = spokodynka.locations.FirstOrDefault(loc => loc.Name.Equals(placeName, StringComparison.OrdinalIgnoreCase));
-            if (placeName == null)
+            if (string.IsNullOrEmpty(placeName))
             {
-                MessageBox.Show("Nie znaleziono podanego miejsca!");
+                MessageBox.Show("Nie wybrano miejsca do eksportu!");
                 return;
             }
+
+            PlacePage selectedPage = Spokodynka.loadedPages
+            .FirstOrDefault(page => page.Location.Name.Equals(placeName, StringComparison.OrdinalIgnoreCase));
+            List<Record> selectedRecords = selectedPage.records;
+
+            Location location = spokodynka.locations.FirstOrDefault(loc => loc.Name.Equals(placeName, StringComparison.OrdinalIgnoreCase));
 
             SaveFileDialog sfd = new SaveFileDialog
             {
                 InitialDirectory = "c:\\",
-                Filter = "XML files (*.xml)|*.xml|CSV files (*.csv)|*.csv|Text files (*.txt)|*.txt",
+                Filter = "XML files (.xml)|.xml|CSV files (.csv)|.csv|Text files (.txt)|.txt",
                 FilterIndex = 1,
                 RestoreDirectory = true,
                 FileName = $"{placeName}_forecast.{forecastDays}"
@@ -131,10 +139,10 @@ namespace Spokodynka_gui.Pages
                             csvHandler.SaveData(filePath, new List<Location> { location });
                             break;
 
-                        /*case ".txt":
+                        case ".txt":
                             TxtHandler txtHandler = new TxtHandler();
-                            txtHandler.Export(filePath, exportPlaceSelect.SelectedItem, location);
-                            break;*/ //do poprawy
+                            txtHandler.Export(filePath, selectedRecords, location);
+                            break;
 
                         default:
                             MessageBox.Show("Nieobsługiwany format pliku!");
@@ -148,8 +156,8 @@ namespace Spokodynka_gui.Pages
                     MessageBox.Show($"Wystąpił błąd podczas zapisu: {ex.Message}");
                 }
             }
-        }
 
+        }
     }
 }
 

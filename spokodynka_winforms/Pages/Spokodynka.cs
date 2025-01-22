@@ -11,7 +11,7 @@ namespace spokodynka_winforms
         public List<Location> locations = new List<Location>();
         private IFileHandler<XMLHandler> fileHandler = new XMLHandler(); // !!! DO OGARNIECIA: JAK ZROBIC ZEBY NIE BYLO NA SZTYWNO DLA XML (CZY IFILEHANDLER MUSI PRZYJMOWAC ATRYBUT?)
         public static List<PlacePage> loadedPages = new List<PlacePage>();
-        private static SettingsPage settingsPage = new SettingsPage() { Dock = DockStyle.Fill };
+        private static SettingsPage settingsPage;
         private readonly string path = Path.Combine( //prywatna zmienna na sciezke!!!!!!
             Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.Parent.FullName,
             "WeatherLogic",
@@ -23,10 +23,11 @@ namespace spokodynka_winforms
         public Spokodynka()
         {
             InitializeComponent();
+            settingsPage = new SettingsPage(this) { Dock = DockStyle.Fill };
             LoadLocations();
         }
 
-        private void LoadLocations()
+        public void LoadLocations()
         {
             try
             {
@@ -176,6 +177,7 @@ namespace spokodynka_winforms
                 loadedPages.Add(new PlacePage(place.location) { Dock = DockStyle.Fill });
             }
         }
+
 
     }
 }

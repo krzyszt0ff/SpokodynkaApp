@@ -1500,44 +1500,4 @@
     <lat>52.2297</lat>
     <lon>21.0122</lon>
   </row>
-  <row>
-    <miasto>Gdańsk</miasto>
-    <lat>54.3482907</lat>
-    <lon>18.6540233</lon>
-  </row>
-  <row>
-    <miasto>Lol Kraków</miasto>
-    <lat>50.0619474</lat>
-    <lon>19.9368564</lon>
-  </row>
-  <row>
-    <miasto>Testowa Łódź</miasto>
-    <lat>51.7687323</lat>
-    <lon>19.4569911</lon>
-  </row>
-  <row>
-    <miasto>Mocny Poznań</miasto>
-    <lat>52.4082663</lat>
-    <lon>16.9335199</lon>
-  </row>
-  <row>
-    <miasto>Gdaaańsk</miasto>
-    <lat>54.3482907</lat>
-    <lon>18.6540233</lon>
-  </row>
-  <row>
-    <miasto>Lol2 Kraków</miasto>
-    <lat>50.0619474</lat>
-    <lon>19.9368564</lon>
-  </row>
-  <row>
-    <miasto>Testowa2 Łódź</miasto>
-    <lat>51.7687323</lat>
-    <lon>19.4569911</lon>
-  </row>
-  <row>
-    <miasto>Mocny2 Poznań</miasto>
-    <lat>52.4082663</lat>
-    <lon>16.9335199</lon>
-  </row>
 </root>

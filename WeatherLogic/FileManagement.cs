@@ -285,22 +285,15 @@ namespace FileManagement
         private readonly string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Exports/");
         private StreamWriter writer;
 
-        public void Export(string filepath, Record weather, Location place)
+        public void Export(string filepath, List<Record> weatherRecords, Location place)
         {
             try
             {
-
-
-                /*
-                 
-                // Narazie komentuje to, ponieważ zmieniłem strukturę klasy Location aby nie umożliwiała zapisu niepełnych danych
-
                 if (place == null) throw new ArgumentException("Invalid data format");
                 if ((place.Lat == 0 || place.Lon == 0) && string.IsNullOrEmpty(place.Name)) throw new ArgumentException("No location for the data to go with.");
 
-                */
-
-                if (!System.IO.Directory.Exists(path)){
+                if (!System.IO.Directory.Exists(path))
+                {
                     System.IO.Directory.CreateDirectory(path);
                 }
 
@@ -309,28 +302,37 @@ namespace FileManagement
                 writer.WriteLine($"---{place.Name}---");
                 writer.WriteLine($"Latitude and longitude: {place.Lat} : {place.Lon}");
 
-                writer.WriteLine($"Date: {weather.date:dd-MM-yyyy:HH:mm:ss}");
+                foreach (var weather in weatherRecords)
+                {
+                    writer.WriteLine($"Date: {weather.date:dd-MM-yyyy:HH:mm:ss}");
 
-                if (weather.temperature != null) writer.WriteLine($"Temperature: {weather.temperature}") ;
-                if (weather.humidity != null) writer.WriteLine($"Humidity: {weather.humidity}");
-                if (weather.windspeed != null) writer.WriteLine($"Windspeed: {weather.windspeed}");
-                if (weather.surfacepressure != null) writer.WriteLine($"Surfacepressure: {weather.surfacepressure}");
+                    if (weather.temperature != null) writer.WriteLine($"Temperature: {weather.temperature}");
+                    if (weather.humidity != null) writer.WriteLine($"Humidity: {weather.humidity}");
+                    if (weather.windspeed != null) writer.WriteLine($"Windspeed: {weather.windspeed}");
+                    if (weather.surfacepressure != null) writer.WriteLine($"Surfacepressure: {weather.surfacepressure}");
 
+                    if (weather.prec != null) writer.WriteLine($"Probability: {weather.prec.probability}");
+                    if (weather.prec != null) writer.WriteLine($"Rain: {weather.prec.rain}");
+                    if (weather.prec != null) writer.WriteLine($"Showers: {weather.prec.showers}");
+                    if (weather.prec != null) writer.WriteLine($"Snowfall: {weather.prec.snowfall}");
 
-                if (weather.prec != null) writer.WriteLine($"Probability: {weather.prec.probability}");
-                if (weather.prec != null) writer.WriteLine($"Rain: {weather.prec.rain}");
-                if (weather.prec != null) writer.WriteLine($"Showers: {weather.prec.showers}");
-                if (weather.prec != null) writer.WriteLine($"Snowfall: {weather.prec.snowfall}");
-
+                    writer.WriteLine(); // Pusta linia dla lepszej czytelności między rekordami
+                }
 
                 writer.WriteLine($"---{place.Name}---");
             }
-            catch (Exception ex) { Console.WriteLine($"Error exporting to TXT: {ex.Message}"); }
-            finally { writer?.Close(); }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error exporting to TXT: {ex.Message}");
+            }
+            finally
+            {
+                writer?.Close();
+            }
         }
     }
 
-    
-    
+
+
 }
 
