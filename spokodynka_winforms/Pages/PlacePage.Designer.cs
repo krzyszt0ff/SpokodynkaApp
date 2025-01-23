@@ -108,7 +108,7 @@
             // currentWeatherPicture
             // 
             currentWeatherPicture.BackgroundImage = Spokodynka_gui.Properties.Resources.sun;
-            currentWeatherPicture.BackgroundImageLayout = ImageLayout.Stretch;
+            currentWeatherPicture.BackgroundImageLayout = ImageLayout.Zoom;
             currentWeatherPicture.Dock = DockStyle.Right;
             currentWeatherPicture.Location = new Point(132, 2);
             currentWeatherPicture.Margin = new Padding(2);

@@ -56,21 +56,32 @@ namespace spokodynka_winforms
 
         private void LoadWeatherVisuals(Record record)
         {
-            if (record.date.Hour > 6 && record.date.Hour > 18) //daytime
-            {
-                currentWeatherPicture.BackgroundImage = Spokodynka_gui.Properties.Resources.sun;
+            bool isDaytime = record.date.Hour > 6 && record.date.Hour <= 18;
+            bool hasPrecipitation = record.prec.probability > 20;
+            bool isSnowing = hasPrecipitation && record.temperature < 0;
 
-            }
-            else //nighttime
+            if (isDaytime)
             {
-                currentWeatherPicture.BackgroundImage = Spokodynka_gui.Properties.Resources.moon;
+                currentWeatherPicture.BackgroundImage = isSnowing
+                    ? Spokodynka_gui.Properties.Resources.snow_sun
+                    : hasPrecipitation
+                        ? Spokodynka_gui.Properties.Resources.rain_sun
+                        : Spokodynka_gui.Properties.Resources.sun;
             }
-
+            else
+            {
+                currentWeatherPicture.BackgroundImage = isSnowing
+                    ? Spokodynka_gui.Properties.Resources.snow_moon
+                    : hasPrecipitation
+                        ? Spokodynka_gui.Properties.Resources.rain_moon
+                        : Spokodynka_gui.Properties.Resources.moon;
+            }
         }
+
 
         private void DisplayHourlyData(List<Record> records)
         {
-            var hourlyRecords = records.Take(12).ToList();
+            var hourlyRecords = records.Take(24).ToList();
             int hour = DateTime.Now.Hour; // nie wiem czy tego uzyc czy wartosci z api bo wartosc z api chyba nie dziala
 
             foreach (var record in hourlyRecords)

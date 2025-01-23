@@ -147,7 +147,7 @@ namespace spokodynka_winforms
         public void LoadHomePage()
         {
             mainContentPanel.Controls.Clear();
-            mainContentPanel.Controls.Add(homePage1);
+            mainContentPanel.Controls.Add(homePage);
         }
 
         public void LoadSettingsPage()
@@ -179,6 +179,10 @@ namespace spokodynka_winforms
             }
         }
 
+        public void isEasterEggOn(bool value)
+        {
+            homePage.EasterEgg(value);
+        }
 
     }
 }

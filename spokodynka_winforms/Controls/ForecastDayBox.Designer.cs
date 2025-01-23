@@ -81,8 +81,6 @@
             forecastBoxTempLabel.TabIndex = 1;
             forecastBoxTempLabel.Text = "0° | 0°";
             forecastBoxTempLabel.TextAlign = ContentAlignment.MiddleRight;
-            forecastBoxTempLabel.Click += forecastBoxTempLabel_Click;
-            forecastBoxTempLabel.MouseDown += forecastBoxTempLabel_MouseDown;
             forecastBoxTempLabel.MouseEnter += forecastBoxTempLabel_MouseEnter;
             forecastBoxTempLabel.MouseLeave += forecastBoxTempLabel_MouseLeave;
             // 

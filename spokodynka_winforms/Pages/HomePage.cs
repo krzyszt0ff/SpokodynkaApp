@@ -16,5 +16,20 @@ namespace spokodynka_winforms
         {
             InitializeComponent();
         }
+        public void EasterEgg(bool value)
+        {
+            if (value)
+            {
+                this.spokoPictureBox.BackgroundImage = Spokodynka_gui.Properties.Resources.spoko_kon;
+                this.sloganLabel.Text = "Twoja konska pogodynka!";
+            }
+            else
+            {
+                this.spokoPictureBox.BackgroundImage = Spokodynka_gui.Properties.Resources.spoko;
+                this.sloganLabel.Text = "Twoja spoko pogodynka!";
+            }
+
+
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace Spokodynka_gui.Pages
     {
         private Spokodynka spokodynka;
         public static int forecastDays { get; set; } = 5;
+        bool secretValue = false;
 
         private readonly string path = Path.Combine( //prywatna zmienna na sciezke!!!!!!
             Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.Parent.FullName,
@@ -165,6 +166,19 @@ namespace Spokodynka_gui.Pages
             }
         }
 
+        private void konieCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            secretValue = !secretValue;
+            if (secretValue)
+            {
+                spokodynka.BackgroundImage = Spokodynka_gui.Properties.Resources.konie_bg;
+            }
+            else
+            {
+                spokodynka.BackgroundImage = Spokodynka_gui.Properties.Resources.bg;
+            }
+            spokodynka.isEasterEggOn(secretValue);
+        }
     }
 }
 

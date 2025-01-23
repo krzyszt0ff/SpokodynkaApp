@@ -32,14 +32,14 @@
             MainSidebarPanel = new Panel();
             PlaceBoxPanel = new Panel();
             SettingsPanel = new Panel();
+            refreshButton = new Button();
             SettingsButton = new Button();
             PlaceAddPanel = new Panel();
             PlaceAddBtn = new Button();
             PlaceTextbox = new TextBox();
             SidebarLabel = new Label();
             mainContentPanel = new Panel();
-            homePage1 = new HomePage();
-            refreshButton = new Button();
+            homePage = new HomePage();
             MainSidebarPanel.SuspendLayout();
             SettingsPanel.SuspendLayout();
             PlaceAddPanel.SuspendLayout();
@@ -81,6 +81,18 @@
             SettingsPanel.Name = "SettingsPanel";
             SettingsPanel.Size = new Size(300, 50);
             SettingsPanel.TabIndex = 5;
+            // 
+            // refreshButton
+            // 
+            refreshButton.BackgroundImage = (Image)resources.GetObject("refreshButton.BackgroundImage");
+            refreshButton.BackgroundImageLayout = ImageLayout.Stretch;
+            refreshButton.Dock = DockStyle.Left;
+            refreshButton.Location = new Point(50, 0);
+            refreshButton.Name = "refreshButton";
+            refreshButton.Size = new Size(50, 50);
+            refreshButton.TabIndex = 1;
+            refreshButton.UseVisualStyleBackColor = true;
+            refreshButton.Click += refreshButton_Click;
             // 
             // SettingsButton
             // 
@@ -145,33 +157,21 @@
             // mainContentPanel
             // 
             mainContentPanel.BackColor = Color.Transparent;
-            mainContentPanel.Controls.Add(homePage1);
+            mainContentPanel.Controls.Add(homePage);
             mainContentPanel.Dock = DockStyle.Fill;
             mainContentPanel.Location = new Point(300, 0);
             mainContentPanel.Name = "mainContentPanel";
             mainContentPanel.Size = new Size(678, 544);
             mainContentPanel.TabIndex = 1;
             // 
-            // homePage1
+            // homePage
             // 
-            homePage1.BackColor = Color.Transparent;
-            homePage1.Dock = DockStyle.Fill;
-            homePage1.Location = new Point(0, 0);
-            homePage1.Name = "homePage1";
-            homePage1.Size = new Size(678, 544);
-            homePage1.TabIndex = 0;
-            // 
-            // refreshButton
-            // 
-            refreshButton.BackgroundImage = (Image)resources.GetObject("refreshButton.BackgroundImage");
-            refreshButton.BackgroundImageLayout = ImageLayout.Stretch;
-            refreshButton.Dock = DockStyle.Left;
-            refreshButton.Location = new Point(50, 0);
-            refreshButton.Name = "refreshButton";
-            refreshButton.Size = new Size(50, 50);
-            refreshButton.TabIndex = 1;
-            refreshButton.UseVisualStyleBackColor = true;
-            refreshButton.Click += refreshButton_Click;
+            homePage.BackColor = Color.Transparent;
+            homePage.Dock = DockStyle.Fill;
+            homePage.Location = new Point(0, 0);
+            homePage.Name = "homePage";
+            homePage.Size = new Size(678, 544);
+            homePage.TabIndex = 0;
             // 
             // Spokodynka
             // 
@@ -203,7 +203,7 @@
         private TextBox PlaceTextbox;
         private Panel PlaceBoxPanel;
         private Panel mainContentPanel;
-        private HomePage homePage1;
+        private HomePage homePage;
         private Panel SettingsPanel;
         private Button SettingsButton;
         private Button refreshButton;
