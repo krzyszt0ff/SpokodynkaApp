@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using spokodynka_winforms;
 using Locations;
 using FileManagement;
 using ApiCom;
@@ -52,6 +51,14 @@ namespace Spokodynka_gui.Pages
             if (!exportPlaceSelect.Items.Contains(placeName))
             {
                 exportPlaceSelect.Items.Add(placeName);
+            }
+        }
+
+        public void RemoveExportPlace(string placeName)
+        {
+            if (exportPlaceSelect.Items.Contains(placeName))
+            {
+                exportPlaceSelect.Items.Remove(placeName);
             }
         }
 
@@ -156,8 +163,8 @@ namespace Spokodynka_gui.Pages
                     MessageBox.Show($"Wystąpił błąd podczas zapisu: {ex.Message}");
                 }
             }
-
         }
+
     }
 }
 

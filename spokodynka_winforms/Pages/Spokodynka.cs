@@ -87,6 +87,7 @@ namespace spokodynka_winforms
             var pageToRemove = loadedPages.FirstOrDefault(page => page.Location.Equals(location));
             if (pageToRemove != null)
             {
+                settingsPage.RemoveExportPlace(pageToRemove.Location.Name);
                 loadedPages.Remove(pageToRemove);
             }
         }

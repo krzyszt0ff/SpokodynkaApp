@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomePage));
             titleLabel = new Label();
-            pictureBox1 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            sloganLabel = new Label();
+            spokoPictureBox = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)spokoPictureBox).BeginInit();
             SuspendLayout();
             // 
             // titleLabel
@@ -43,38 +43,56 @@
             titleLabel.Location = new Point(0, 0);
             titleLabel.Name = "titleLabel";
             titleLabel.Padding = new Padding(0, 20, 0, 0);
-            titleLabel.Size = new Size(810, 108);
-            titleLabel.TabIndex = 3;
-            titleLabel.Text = "Spoko strona główna";
+            titleLabel.Size = new Size(810, 100);
+            titleLabel.TabIndex = 4;
+            titleLabel.Text = "Spokodynka";
             titleLabel.TextAlign = ContentAlignment.TopCenter;
             // 
-            // pictureBox1
+            // sloganLabel
             // 
-            pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
-            pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Location = new Point(0, 108);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(810, 388);
-            pictureBox1.TabIndex = 4;
-            pictureBox1.TabStop = false;
+            sloganLabel.BackColor = Color.Transparent;
+            sloganLabel.Dock = DockStyle.Top;
+            sloganLabel.Font = new Font("Lucida Sans", 20F);
+            sloganLabel.ForeColor = Color.WhiteSmoke;
+            sloganLabel.Location = new Point(0, 100);
+            sloganLabel.Name = "sloganLabel";
+            sloganLabel.Padding = new Padding(0, 20, 0, 0);
+            sloganLabel.Size = new Size(810, 88);
+            sloganLabel.TabIndex = 6;
+            sloganLabel.Text = "Twoja spoko pogodynka!";
+            sloganLabel.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // spokoPictureBox
+            // 
+            spokoPictureBox.BackgroundImage = Spokodynka_gui.Properties.Resources.spoko;
+            spokoPictureBox.BackgroundImageLayout = ImageLayout.Zoom;
+            spokoPictureBox.Dock = DockStyle.Fill;
+            spokoPictureBox.Location = new Point(0, 188);
+            spokoPictureBox.Margin = new Padding(10);
+            spokoPictureBox.Name = "spokoPictureBox";
+            spokoPictureBox.Padding = new Padding(10);
+            spokoPictureBox.Size = new Size(810, 308);
+            spokoPictureBox.TabIndex = 9;
+            spokoPictureBox.TabStop = false;
             // 
             // HomePage
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Transparent;
-            Controls.Add(pictureBox1);
+            Controls.Add(spokoPictureBox);
+            Controls.Add(sloganLabel);
             Controls.Add(titleLabel);
             Name = "HomePage";
             Size = new Size(810, 496);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)spokoPictureBox).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Label titleLabel;
-        private PictureBox pictureBox1;
+        private Label sloganLabel;
+        private PictureBox spokoPictureBox;
     }
 }

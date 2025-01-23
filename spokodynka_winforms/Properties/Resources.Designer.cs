@@ -153,6 +153,16 @@ namespace Spokodynka_gui.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap spoko {
+            get {
+                object obj = ResourceManager.GetObject("spoko", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap sun {
             get {
                 object obj = ResourceManager.GetObject("sun", resourceCulture);
