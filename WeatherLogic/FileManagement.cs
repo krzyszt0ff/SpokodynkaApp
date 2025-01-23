@@ -27,8 +27,6 @@ namespace FileManagement
     /// </summary>
     public class XMLHandler(): IFileHandler<XMLHandler>
     {
-        //private readonly string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LocData/");
-        //tymczasowo zakomentowuję, bo po dodaniu winformsa ścieżka się zmieniła
         private readonly string path = Path.Combine(
             Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.Parent.FullName,
             "WeatherLogic",
@@ -36,8 +34,6 @@ namespace FileManagement
         );
 
 
-
-        //AAAAAAAAAAAAAAAAAAA
         /// <summary>
         /// Load data from {filename} path , .xml format is already specified
         /// </summary>
@@ -125,10 +121,8 @@ namespace FileManagement
             XmlDocument document = new XmlDocument();
             XmlElement rootElement;
 
-            //if(File.Exists(Path.Combine(path, filename + ".xml"))){
             if (File.Exists(filepath))
             {
-                //document.Load(Path.Combine(path, filename + ".xml"));
                 document.Load(filepath);
                 rootElement = (XmlElement)document.SelectSingleNode("/root");
             }
@@ -141,7 +135,6 @@ namespace FileManagement
 
 
             AppendToDocument(location, document, rootElement);
-            //document.Save(Path.Combine(path, filename + ".xml"));
             document.Save(filepath);
             return this;
         }
@@ -188,14 +181,11 @@ namespace FileManagement
         /// </summary>
         public List<Location> LoadData(string filepath)
         {
-
-            string fullFilePath = Path.Combine(filepath);
-
-            if (File.Exists(fullFilePath))
+            if (File.Exists(filepath))
             {
                 List<Location> Locations = new List<Location>();
 
-                using (StreamReader reader = new StreamReader(fullFilePath))
+                using (StreamReader reader = new StreamReader(filepath))
                 {
                     string line;
                     while ((line = reader.ReadLine()) != null)
@@ -316,7 +306,7 @@ namespace FileManagement
                     if (weather.prec != null) writer.WriteLine($"Showers: {weather.prec.showers}");
                     if (weather.prec != null) writer.WriteLine($"Snowfall: {weather.prec.snowfall}");
 
-                    writer.WriteLine(); // Pusta linia dla lepszej czytelności między rekordami
+                    writer.WriteLine();
                 }
 
                 writer.WriteLine($"---{place.Name}---");

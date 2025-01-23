@@ -9,10 +9,10 @@ namespace spokodynka_winforms
     {
 
         public List<Location> locations = new List<Location>();
-        private IFileHandler<XMLHandler> fileHandler = new XMLHandler(); // !!! DO OGARNIECIA: JAK ZROBIC ZEBY NIE BYLO NA SZTYWNO DLA XML (CZY IFILEHANDLER MUSI PRZYJMOWAC ATRYBUT?)
+        private IFileHandler<XMLHandler> fileHandler = new XMLHandler();
         public static List<PlacePage> loadedPages = new List<PlacePage>();
         private static SettingsPage settingsPage;
-        private readonly string path = Path.Combine( //prywatna zmienna na sciezke!!!!!!
+        private readonly string path = Path.Combine(
             Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.Parent.FullName,
             "WeatherLogic",
             "LocData",
@@ -31,7 +31,7 @@ namespace spokodynka_winforms
         {
             try
             {
-                locations = fileHandler.LoadData(path); // Nazwa tymczasowa, potem zrobic jakos zeby bralo to jako domyslna ale wprowadzic to jako domyslna I guess??
+                locations = fileHandler.LoadData(path);
             }
             catch (Exception ex)
             {
@@ -41,7 +41,7 @@ namespace spokodynka_winforms
 
         private Location findPlace(string query)
         {
-            return locations.FirstOrDefault(loc => loc.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0); ///Wyszukiwanie do poprawienia!!! Za bardzo wyszukuje,,,,,
+            return locations.FirstOrDefault(loc => loc.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
         private void addPlaceBox()

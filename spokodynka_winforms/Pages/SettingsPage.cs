@@ -20,7 +20,7 @@ namespace Spokodynka_gui.Pages
         public static int forecastDays { get; set; } = 5;
         bool secretValue = false;
 
-        private readonly string path = Path.Combine( //prywatna zmienna na sciezke!!!!!!
+        private readonly string path = Path.Combine(
             Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.Parent.FullName,
             "WeatherLogic",
             "LocData",
@@ -91,7 +91,7 @@ namespace Spokodynka_gui.Pages
                 else if (filePath.EndsWith(".csv", StringComparison.OrdinalIgnoreCase))
                 {
                     CSVHandler csvHandler = new CSVHandler();
-                    List<Location> importedLocations = csvHandler.LoadData(Path.GetFileNameWithoutExtension(filePath));
+                    List<Location> importedLocations = csvHandler.LoadData(filePath);
 
                     XMLHandler xmlHandler = new XMLHandler();
                     foreach (var location in importedLocations)
