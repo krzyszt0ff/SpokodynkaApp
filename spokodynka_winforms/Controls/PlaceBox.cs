@@ -64,7 +64,7 @@ namespace spokodynka_winforms
             }
 
             selectedPlaceBox = this;
-            backgroundPanel.BackColor = Color.FromArgb(150, 64, 168, 255); ///kolor zaznaczenia
+            backgroundPanel.BackColor = Color.FromArgb(100, 20, 112, 189); ///kolor zaznaczenia
 
             PlaceSelected?.Invoke(this, EventArgs.Empty);
         }

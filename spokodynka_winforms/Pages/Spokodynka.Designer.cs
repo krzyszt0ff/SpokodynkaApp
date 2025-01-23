@@ -145,7 +145,7 @@
             SidebarLabel.BackColor = Color.Transparent;
             SidebarLabel.Dock = DockStyle.Top;
             SidebarLabel.Font = new Font("Lucida Sans", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            SidebarLabel.ForeColor = Color.DimGray;
+            SidebarLabel.ForeColor = Color.Gray;
             SidebarLabel.Location = new Point(0, 0);
             SidebarLabel.Name = "SidebarLabel";
             SidebarLabel.Size = new Size(300, 52);

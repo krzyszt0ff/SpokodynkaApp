@@ -96,7 +96,7 @@ namespace spokodynka_winforms
                 };
                 if(hour == sysHour)
                 {
-                    newforecastHourBox.BackColor = Color.FromArgb(200, 237, 203, 33);
+                    newforecastHourBox.BackColor = Color.FromArgb(100, 20, 112, 189);
                 }
 
                 hour = (hour + 1) % 24;
