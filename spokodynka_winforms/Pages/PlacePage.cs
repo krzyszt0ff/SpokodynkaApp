@@ -9,6 +9,7 @@ namespace spokodynka_winforms
         private readonly IApiCom _apiCom;
         private Location location;
         public List<Record> records;
+        int sysHour = DateTime.Now.Hour;
 
         public Location Location => location;
 
@@ -37,7 +38,7 @@ namespace spokodynka_winforms
 
                 if (records != null && records.Count > 0)
                 {
-                    Record currentRecord = records[0];
+                    Record currentRecord = records.FirstOrDefault(r => r.date.Hour == sysHour);
                     DisplayHourlyData(records);
                     DisplayDailyData(records);
                     currentTempLabel.Text = currentRecord.temperature.ToString() + "°C";
@@ -56,7 +57,7 @@ namespace spokodynka_winforms
 
         private void LoadWeatherVisuals(Record record)
         {
-            bool isDaytime = record.date.Hour > 6 && record.date.Hour <= 18;
+            bool isDaytime = sysHour > 6 && sysHour <= 18;
             bool hasPrecipitation = record.prec.probability > 20;
             bool isSnowing = hasPrecipitation && record.temperature < 0;
 
@@ -82,11 +83,10 @@ namespace spokodynka_winforms
         private void DisplayHourlyData(List<Record> records)
         {
             var hourlyRecords = records.Take(24).ToList();
-            int hour = DateTime.Now.Hour; // nie wiem czy tego uzyc czy wartosci z api bo wartosc z api chyba nie dziala
 
             foreach (var record in hourlyRecords)
             {
-                //int hour = record.date.Hour;
+                int hour = record.date.Hour;
                 double temp = record.temperature.HasValue ? (double)record.temperature.Value : 0;
 
                 ForecastHourBox newforecastHourBox = new ForecastHourBox(hour, temp)
@@ -94,6 +94,10 @@ namespace spokodynka_winforms
                     Dock = DockStyle.Top,
                     Margin = new Padding(10)
                 };
+                if(hour == sysHour)
+                {
+                    newforecastHourBox.BackColor = Color.FromArgb(200, 237, 203, 33);
+                }
 
                 hour = (hour + 1) % 24;
 
